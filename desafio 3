@@ -1,0 +1,49 @@
+import pandas as pd
+
+def show_distance(x, y):
+    
+    total_sum = 0
+    
+    for i in range(len(x)):
+        
+        total_sum += (x[i] - y[i])**2
+        
+    total_sum = total_sum**0.5
+    return total_sum
+
+def calcul_all_distance(objects):
+    
+    table_distance = [[0] * 4 for i in range(4)]
+
+    for i in range(4):
+        
+        for j in range(4):
+            
+            table_distance[i][j] = int(show_distance(objects[i], objects[j]))
+            
+    return table_distance
+
+def show_avarage(table_distance):
+    
+    avarage = [[sum(table_distance[w])] for w in range(4)]
+    
+    print(avarage, end='\n')
+    
+def main():
+    data_base = pd.read_excel("Failing_Equipment_Exercise.xlsx")
+
+    objects = data_base.values.tolist()
+    objects = [[row[i] for row in objects] for i in range(len(objects[0]))] 
+    objects.pop(0)
+
+    table_distance = calcul_all_distance(objects)
+    show_avarage(table_distance)
+    
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
